@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Gráficos y Botones</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        canvas {
+            max-width: 1000px;
+            margin: auto;
+            display: block;
+            width: 450px;
+            height: 500px;
+        }
+        button {
+            background-color: #4c93af;
+            color: rgb(204, 236, 18);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Proyecto de gráficos Gota Doble</h2>  
+    <!-- El canvas dentro del grafico para manipular los efectos visuales   -->
+    <canvas id="miGrafico"></canvas>
+    <div>
+        <!-- La estructura de los botones  -->
+        <button onclick="cambiarDatos()">Cambiar Datos</button>
+        <button onclick="cambiarTipoGrafico()">Cambiar el Gráfico</button>
+    </div>
+
+    <script>
+        // Configuración inicial del gráfico canvas
+        var ctx = document.getElementById('miGrafico').getContext('2d');
+        var miGrafico = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico inicial (barras)
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto', 'Septiembre', 'Octubre','Noviembre', 'Diciembre'], // Etiquetas de las barras
+                datasets: [{
+                    label: 'Organizacion de eventos 2024',
+                    data: [65, 59, 80, 81, 56, 55, 10,70,95,30,85,100], // Datos iniciales
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            }
+        });
+
+        // Función para cambiar los datos del gráfico
+        function cambiarDatos() {
+            miGrafico.data.datasets[0].data = [45, 70, 90, 55, 85, 60,30,100,80,89,45,100]; // Nuevos datos
+            miGrafico.update(); // Actualizamos el gráfico
+        }
+
+        // Función para cambiar el tipo de gráfico (de barras a línea)
+        function cambiarTipoGrafico() {
+            var nuevoTipo = miGrafico.config.type === 'bar' ? 'line' : 'bar'; // Cambiar entre 'bar' y 'line'
+            miGrafico.config.type = nuevoTipo;
+            miGrafico.update(); // Actualizamos el gráfico con el nuevo tipo
+        }
+    </script>
+</body>
+</html>
