@@ -1,3 +1,15 @@
 .navar{
     background-color: #e3f2fd;
 }
+
+.titulo-uno{
+    color: blue;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#formRegistro{
+    width: 30%;
+}
+.error {
+    color: red;
+}
